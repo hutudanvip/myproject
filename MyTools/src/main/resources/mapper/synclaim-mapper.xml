@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.common.util.ibatis.bean.ClaimInfo">
+
+	<!-- 查询车辆差错编码是否已经存在，存在则不能插入 -->
+	<select id="select" parameterType="String" resultType="int">
+				select count(1)
+		from t_adv_claims c
+		<where>
+		<![CDATA[ 
+	 			c.FEEDBACKTIME < sysdate and c.isFeedBack = 1 and c.isProgressFeedBack = 0
+	 		]]>
+		</where>
+	</select>
+	
+	<!-- 插入车辆差错数据 -->
+	<insert id="insert"
+		parameterType="com.common.util.ibatis.bean.ClaimInfo">
+		insert into t_adv_claims
+		(cid, errorCode, plateNum,
+		accidentTime, carType,
+		errorType, backCode,
+		dutyStyle, dutyType,  isAssessed,
+		isTakeAssessed,
+		ourAssessedCost, otherAssessedCost, ourIndemnity,
+		otherIndemnity, insuranceCom,
+		accidentCost, driverNum, driverName,
+		driverDept, reportTime,
+		reportDept, operateName, dutyCareerDept,
+		trackDept, accidentDesc,
+		CREATETIME)
+		values
+		(sys_guid(),
+		#{errorCode,jdbcType=VARCHAR}, #{plateNum,jdbcType=VARCHAR},
+		#{accidentTime, jdbcType=DATE}, #{carType,jdbcType=VARCHAR},
+		#{errorType,jdbcType=VARCHAR},
+		#{backCode,jdbcType=VARCHAR},
+		#{dutyStyle,jdbcType=VARCHAR},
+		#{dutyType,jdbcType=VARCHAR},
+		#{isAssessed,jdbcType=INTEGER}, #{isTakeAssessed,jdbcType=INTEGER},
+		#{ourAssessedCost,jdbcType=DECIMAL},
+		#{otherAssessedCost,jdbcType=DECIMAL},
+		#{ourIndemnity,jdbcType=DECIMAL}, #{otherIndemnity,jdbcType=DECIMAL},
+		#{insuranceCom,jdbcType=VARCHAR},
+		#{accidentCost, jdbcType=DECIMAL}, #{driverNum, jdbcType=VARCHAR},
+		#{driverName,  jdbcType=VARCHAR}, #{driverDept,  jdbcType=VARCHAR}, #{reportTime, jdbcType=DATE},
+		#{reportDept,jdbcType=VARCHAR}, #{operateName, jdbcType=VARCHAR},
+		#{dutyCareerDept,jdbcType=VARCHAR}, #{trackDept, jdbcType=VARCHAR},
+		#{accidentDesc,jdbcType=VARCHAR} ,
+		sysdate)
+	</insert>
+</mapper>
