@@ -2,10 +2,13 @@ package com.deppon;
 
 public class Test {
 	public static void main(String[] args) {
-		 System.out.println("·½·¨Ãû "+Thread.currentThread().getStackTrace()[1].getMethodName());
-	        System.out.println("ÀàÃû "+Thread.currentThread().getStackTrace()[1].getClassName());
-	        System.out.println("ÎÄ¼þÃû " + Thread.currentThread().getStackTrace()[1].getFileName());
-	        System.out.println("ËùÔÚµÄÐÐÊý "+Thread.currentThread().getStackTrace());
+		
+		boolean b = true;String s = String.valueOf(b);System.out.println(s);
+		
+		 System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ "+Thread.currentThread().getStackTrace()[1].getMethodName());
+	        System.out.println("ï¿½ï¿½ï¿½ï¿½ "+Thread.currentThread().getStackTrace()[1].getClassName());
+	        System.out.println("ï¿½Ä¼ï¿½ï¿½ï¿½ " + Thread.currentThread().getStackTrace()[1].getFileName());
+	        System.out.println("ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ "+Thread.currentThread().getStackTrace());
 		getPath();
 //		System.out.println(Class);
 	}

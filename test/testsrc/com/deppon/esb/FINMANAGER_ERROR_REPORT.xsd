@@ -37,7 +37,7 @@
 					<documentation>车牌号</documentation>
 				</annotation>
 			</element>
-			<element name="accidentTime" type="date">
+			<element name="accidentTime" type="dateTime">
 				<annotation>
 					<documentation>事故时间</documentation>
 				</annotation>

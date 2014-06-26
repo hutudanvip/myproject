@@ -1,9 +1,12 @@
 package com.common.util.ibatis.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import com.common.util.ibatis.bean.ClaimInfo;
+import com.common.util.ibatis.bean.ClaimInfoChild;
 
 
 @Repository
@@ -16,8 +19,13 @@ public class ObjectEntityDaoImp extends SqlSessionDaoSupport implements ObjectEn
 	}
 
 	@Override
-	public void insert(ClaimInfo info) {
-		getSqlSession().insert(NS + "insert", info);
+	public void insert(List<ClaimInfo> list) {
+		getSqlSession().insert(NS + "insert", list);
+	}
+
+	@Override
+	public List<String> selectList(String deptCode) {
+		return getSqlSession().selectList(NS + "select", deptCode);
 	}
 
 }

@@ -64,7 +64,7 @@
 					<documentation>记录客户端的后端接入系统标识</documentation>
 				</annotation>
 			</element>
-			<element name="ESBServiceCode" type="string" minOccurs="1"
+			<element name="esbServiceCode" type="string" minOccurs="1"
 				maxOccurs="1">
 				<annotation>
 					<documentation>ESB提供给服务消费端的服务编码</documentation>

@@ -6,50 +6,78 @@
 	namespace="com.common.util.ibatis.bean.ClaimInfo">
 
 	<!-- 查询车辆差错编码是否已经存在，存在则不能插入 -->
-	<select id="select" parameterType="String" resultType="int">
-				select count(1)
-		from t_adv_claims c
-		<where>
-		<![CDATA[ 
-	 			c.FEEDBACKTIME < sysdate and c.isFeedBack = 1 and c.isProgressFeedBack = 0
-	 		]]>
-		</where>
+<!-- 	<select id="select" parameterType="String" resultType="com.common.util.ibatis.bean.ClaimInfo" 
+		resultMap="oaAlertMap">
+			select fid, fbusiCode, fbillNum, fbillTye, fbusiType,
+				fcreateTime, fhandleStatus, fupdateTime, fuserCode, 
+				fdescribtion,  furl  from t_fins_oaalert
+    		where fhandleStatus = 0 and fuserCode = '051782'
+	</select> -->
+	<select id="select"  parameterType="java.lang.String" resultType="java.lang.String">
+		select e.empcode from t_org_employee e
+			inner join t_org_department d on d.id = e.deptid
+			where d.finasyscode = #{deptCode}
 	</select>
 	
+<!-- 	<select id="select" parameterType="String" resultType="int" >
+			select count(1) from t_fins_oaalert
+    		where fhandleStatus = 0 and fuserCode = '051782'
+	</select> -->
+	
+	<resultMap id="oaAlertMap" type="com.common.util.ibatis.bean.ClaimInfo">
+		<result property="id" column="fid"/>
+		<result property="busiCode" column="fbusiCode" jdbcType="VARCHAR"/>
+		<result property="billNum" column="fbillNum" jdbcType="VARCHAR"/>
+		<result property="billTye" column="fbillTye" jdbcType="VARCHAR"/>
+		<result property="busiType" column="fbusiType" jdbcType="VARCHAR"/>
+		
+		<result property="createTime" column="fcreateTime" jdbcType="DATE"/>
+	 	<result property="handleStatus" column="fhandleStatus" jdbcType="INTEGER"/>
+		
+		<result property="updateTime" column="fupdateTime" jdbcType="DATE"/>
+		<result property="userCode" column="fuserCode" jdbcType="VARCHAR"/>
+		<result property="describtion" column="fdescribtion" jdbcType="VARCHAR"/>
+		<result property="url" column="furl" jdbcType="VARCHAR"/>
+	</resultMap>
+	
 	<!-- 插入车辆差错数据 -->
-	<insert id="insert"
-		parameterType="com.common.util.ibatis.bean.ClaimInfo">
-		insert into t_adv_claims
-		(cid, errorCode, plateNum,
-		accidentTime, carType,
-		errorType, backCode,
-		dutyStyle, dutyType,  isAssessed,
-		isTakeAssessed,
-		ourAssessedCost, otherAssessedCost, ourIndemnity,
-		otherIndemnity, insuranceCom,
-		accidentCost, driverNum, driverName,
-		driverDept, reportTime,
-		reportDept, operateName, dutyCareerDept,
-		trackDept, accidentDesc,
-		CREATETIME)
+	<insert id="insert" 
+		parameterType="com.common.util.ibatis.bean.ClaimInfo" >
+		insert into t_fins_oaalert
+		(fid,
+		fbusiCode,
+		fbillNum,
+		fbillTye,
+		fbusiType,
+		fcreateTime,
+		fhandleStatus,
+		fupdateTime,
+		fuserCode,
+		fdescribtion,
+		fsourceBillID,
+		furl)
 		values
 		(sys_guid(),
-		#{errorCode,jdbcType=VARCHAR}, #{plateNum,jdbcType=VARCHAR},
-		#{accidentTime, jdbcType=DATE}, #{carType,jdbcType=VARCHAR},
-		#{errorType,jdbcType=VARCHAR},
-		#{backCode,jdbcType=VARCHAR},
-		#{dutyStyle,jdbcType=VARCHAR},
-		#{dutyType,jdbcType=VARCHAR},
-		#{isAssessed,jdbcType=INTEGER}, #{isTakeAssessed,jdbcType=INTEGER},
-		#{ourAssessedCost,jdbcType=DECIMAL},
-		#{otherAssessedCost,jdbcType=DECIMAL},
-		#{ourIndemnity,jdbcType=DECIMAL}, #{otherIndemnity,jdbcType=DECIMAL},
-		#{insuranceCom,jdbcType=VARCHAR},
-		#{accidentCost, jdbcType=DECIMAL}, #{driverNum, jdbcType=VARCHAR},
-		#{driverName,  jdbcType=VARCHAR}, #{driverDept,  jdbcType=VARCHAR}, #{reportTime, jdbcType=DATE},
-		#{reportDept,jdbcType=VARCHAR}, #{operateName, jdbcType=VARCHAR},
-		#{dutyCareerDept,jdbcType=VARCHAR}, #{trackDept, jdbcType=VARCHAR},
-		#{accidentDesc,jdbcType=VARCHAR} ,
-		sysdate)
+		(select to_char(sysdate, 'yyyymmddHH24miss') from dual),
+		#{billNum, jdbcType=VARCHAR},
+		#{billTye, jdbcType=VARCHAR},
+		#{busiType, jdbcType=VARCHAR},
+		sysdate,
+		0,
+		sysdate,
+		#{userCode, jdbcType=VARCHAR},
+		#{describtion, jdbcType=VARCHAR},
+		#{sourceBillID, jdbcType=VARCHAR},
+		#{url,  jdbcType=VARCHAR}
+		)
 	</insert>
+	
+	<parameterMap type="com.common.util.ibatis.bean.ClaimInfo" id="mymap">
+		<parameter property="createTime"  
+			javaType="javax.xml.datatype.XMLGregorianCalendar"
+			jdbcType="TIMESTAMP" 
+			typeHandler="com.common.util.ibatis.bean.XMLDateTypeHandler"/>
+	
+	</parameterMap>
+	
 </mapper>
