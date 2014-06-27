@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
-import org.apache.commons.beanutils.BeanUtils;
+//import org.apache.commons.beanutils.BeanUtils;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -400,8 +400,8 @@ public class JsonUtils {
         Date date;
         for (int i = 0; i < jsonArray.size(); i++) {
             dateString = jsonArray.getString(i);
-            date = DateUtil.parseDate(dateString, DataFormat);
-            dateArray[i] = date;
+//            date = DateUtil.parseDate(dateString, DataFormat);
+//            dateArray[i] = date;
 
         }
         return dateArray;
@@ -1182,7 +1182,7 @@ public class JsonUtils {
           List<D> detailList = JsonUtils.toList(jsonArray, detailClass);
           try
           {
-              BeanUtils.setProperty(mainEntity, detailName, detailList);
+//              BeanUtils.setProperty(mainEntity, detailName, detailList);
           }
           catch (Exception ex)
           {
@@ -1213,8 +1213,8 @@ public class JsonUtils {
           List<D2> detailList2 = JsonUtils.toList(jsonArray2, detailClass2);
           try
           {
-              BeanUtils.setProperty(mainEntity, detailName1, detailList1);
-              BeanUtils.setProperty(mainEntity, detailName2, detailList2);
+//              BeanUtils.setProperty(mainEntity, detailName1, detailList1);
+//              BeanUtils.setProperty(mainEntity, detailName2, detailList2);
           }
           catch (Exception ex)
           {
@@ -1249,9 +1249,9 @@ public class JsonUtils {
           List<D3> detailList3 = JsonUtils.toList(jsonArray3, detailClass3);
           try
           {
-              BeanUtils.setProperty(mainEntity, detailName1, detailList1);
-              BeanUtils.setProperty(mainEntity, detailName2, detailList2);
-              BeanUtils.setProperty(mainEntity, detailName3, detailList3);
+//              BeanUtils.setProperty(mainEntity, detailName1, detailList1);
+//              BeanUtils.setProperty(mainEntity, detailName2, detailList2);
+//              BeanUtils.setProperty(mainEntity, detailName3, detailList3);
           }
           catch (Exception ex)
           {
@@ -1274,7 +1274,7 @@ public class JsonUtils {
               try
               {
                   Class value = (Class) detailClass.get(key);
-                  BeanUtils.setProperty(mainEntity, key.toString(), value);
+//                  BeanUtils.setProperty(mainEntity, key.toString(), value);
               }
               catch (Exception ex)
               {
@@ -1291,8 +1291,8 @@ public class JsonUtils {
      	 Date date; 
      	 for( int i = 0 ; i<jsonArray.size() ; i++ ){ 
      	 dateString = jsonArray.getString(i); 
-     	 date = DateUtil.stringToDate(dateString, DataFormat); 
-     	 dateArray[i] = date; 
+//     	 date = DateUtil.stringToDate(dateString, DataFormat); 
+//     	 dateArray[i] = date; 
      	 } return dateArray; 
      }       
       

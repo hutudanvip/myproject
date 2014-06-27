@@ -302,6 +302,25 @@ public class DateTimeUtils
         return dateOfLastMonth;
     }
     
+    /**
+     * 
+    * 功能：获取N月前的今天，如N = 2 ，给定日期为：2006-10-11，则返回的日期为：2006-8-11
+    * 作者：afei
+    * 时间：2014-4-3下午10:15:14
+    * 参数：
+    *返回值：
+    *
+     */
+    public static Date getDateOfPreNMonth(int n, Date date)
+    {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) - n);
+       
+        Date dateOfLastMonth = calendar.getTime();
+        
+        return dateOfLastMonth;
+    }
     public static Date get1stDayOfTheMonth(Date date)
     {
         Calendar calendar = Calendar.getInstance();

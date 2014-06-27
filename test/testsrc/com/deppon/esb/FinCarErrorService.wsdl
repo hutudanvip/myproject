@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://www.deppon.com/foss/module/advance/server/service/webservice/interface/FinSynCarErrorService"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	name="FinService" targetNamespace="http://www.deppon.com/foss/module/advance/server/service/webservice/interface/FinSynCarErrorService"
+	xmlns:tns_domain="http://www.deppon.com/foss/module/advance/server/service/webservice/"
+	xmlns:tns_header="http://www.deppon.com/esb/header"
+	xmlns:tns_exception="http://www.deppon.com/esb/exception">
+	<wsdl:documentation>车辆差错信息同步接口</wsdl:documentation>
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://www.deppon.com/foss/module/advance/server/service/webservice/">
+			<xsd:include schemaLocation="FINMANAGER_ERROR_REPORT.xsd" />
+		</xsd:schema>
+		<xsd:schema targetNamespace="http://www.deppon.com/esb/header">
+			<xsd:include schemaLocation="ESBHeader.xsd" />
+		</xsd:schema>
+		<xsd:schema targetNamespace="http://www.deppon.com/esb/exception">
+			<xsd:include schemaLocation="CommonException.xsd" />
+		</xsd:schema>
+	</wsdl:types>
+
+	<wsdl:message name="ESBHeader">
+		<wsdl:part element="tns_header:esbHeader" name="header" />
+	</wsdl:message>
+
+	<wsdl:message name="CommException">
+		<wsdl:part name="CommException" element="tns_exception:commonExceptionInfo" />
+	</wsdl:message>
+
+
+	<wsdl:message name="synCarErrorRptRequest">
+		<wsdl:part name="request" element="tns_domain:synCarErrorRptRequest">
+		</wsdl:part>
+		<wsdl:part name="esbHeader" element="tns_header:esbHeader" />
+	</wsdl:message>
+	<wsdl:message name="synCarErrorRptResponse">
+		<wsdl:part name="response" element="tns_domain:synCarErrorRptResponse">
+		</wsdl:part>
+		<wsdl:part name="esbHeader" element="tns_header:esbHeader" />
+	</wsdl:message>
+	<wsdl:message name="synCarErrorFault">
+		<wsdl:part name="CommException" element="tns_exception:commonExceptionInfo"></wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="ISynCarErrorService">
+		<wsdl:documentation>车辆差错信息同步接口</wsdl:documentation>
+		<wsdl:operation name="synCarError">
+			<wsdl:input message="tns:synCarErrorRptRequest" />
+			<wsdl:output message="tns:synCarErrorRptResponse" />
+			<wsdl:fault name="CommException" message="tns:CommException" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="NewBinding" type="tns:ISynCarErrorService">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="synCarError">
+			<soap:operation
+				soapAction="http://www.deppon.com/foss/module/advance/server/service/webservice/interface/FinSynCarErrorService" />
+			<wsdl:input>
+				<soap:header use="literal" part="esbHeader"
+					message="tns:synCarErrorRptRequest" />
+				<soap:body use="literal" parts="request" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:header use="literal" part="esbHeader"
+					message="tns:synCarErrorRptResponse" />
+				<soap:body use="literal" parts="response" />
+			</wsdl:output>
+			<wsdl:fault name="CommException">
+				<soap:fault use="literal" name="CommException" />
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="FinService">
+		<wsdl:port binding="tns:NewBinding" name="FinService">
+			<soap:address location="http://www.deppon.com/foss/module/advance/server/service/webservice/interface/FinSynCarErrorService" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
