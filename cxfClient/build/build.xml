@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="cxf wsdl2java" basedir="." default="client_jar">  
+  
+	<property name="cxf.home" value ="../WebContent/WEB-INF"/> 
+	<property name="class" value="class"/>
+	<property name="dest" value="dest"></property>
+	
+	<path id="cxf.classpath">
+      <fileset dir="${cxf.home}/lib">
+         <include name="*.jar"/>
+      </fileset>
+    </path> 
+	
+	<!--CXF根据WSDL地址生成客户端代码-->
+   <target name="cxfWSDLToJava">
+      <java classname="org.apache.cxf.tools.wsdlto.WSDLToJava" fork="true">
+         <arg value="-client"/>
+         <arg value="-d"/>
+         <arg value="../src"/>
+        <arg value="http://localhost:9090/financManager/webservice/claimsInterService?wsdl"/>
+      	 <!-- <arg value="http://10.224.64.53:8881/claim/webservice/MobileFsscService?wsdl "/>-->
+      	
+      	<classpath>
+            <path refid="cxf.classpath"/>
+         </classpath>
+      </java>
+   </target>
+	
+	 <!--删除目录-->
+		<target name="clean">
+			<delete dir="${class}">
+			</delete>
+			<delete dir="${dest}">
+			</delete>
+		</target>
+	
+	<!--创建文件夹存储编译文件和包文件-->
+	<target name="createdir" depends="clean">
+		<mkdir dir="${class}"/>
+		<mkdir dir="${dest}"/>
+	</target>
+	<!--编译客户端文件为CLASS文件-->
+	<target name="compile" depends="cxfWSDLToJava,createdir">
+		<echo>开始编译源文件</echo>
+		<javac encoding="GBK" srcdir="../src" destdir="${class}" includeantruntime="on" verbose="true">
+		</javac>
+	</target>
+	
+	<!--将CLASS文件编译为jar-->
+		<target name="client_jar" depends="compile">
+			<echo>打包源class文件为jar</echo>
+			<jar destfile="${dest}/ehr-loanService.jar" basedir="${class}">
+			</jar>
+		</target>
+
+</project>
