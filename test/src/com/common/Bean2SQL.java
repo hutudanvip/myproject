@@ -14,7 +14,6 @@ import java.util.Map;
 public class Bean2SQL {
 	
 	private static Map<String, String> map;
-	//����JAVA���ͺ�DB����ӳ��
 	static {
 		map = new HashMap<String, String>();
 		map.put("String", "varchar2(20)");
