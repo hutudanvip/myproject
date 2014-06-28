@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="responseId" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="sourceSystem" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="targetSystem" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="ESBServiceCode" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="esbServiceCode" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="backServiceCode" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="messageFormat" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="exchangePattern" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
@@ -77,7 +77,7 @@ public class ESBHeader {
     @XmlElement(required = true)
     protected String sourceSystem;
     protected String targetSystem;
-    @XmlElement(name = "ESBServiceCode", required = true)
+    @XmlElement(required = true)
     protected String esbServiceCode;
     protected String backServiceCode;
     protected String messageFormat;
@@ -311,7 +311,7 @@ public class ESBHeader {
      *     {@link String }
      *     
      */
-    public String getESBServiceCode() {
+    public String getEsbServiceCode() {
         return esbServiceCode;
     }
 
@@ -323,7 +323,7 @@ public class ESBHeader {
      *     {@link String }
      *     
      */
-    public void setESBServiceCode(String value) {
+    public void setEsbServiceCode(String value) {
         this.esbServiceCode = value;
     }
 

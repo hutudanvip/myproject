@@ -3,6 +3,7 @@ package com.deppon.esb.header;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -16,7 +17,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="statusId" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="statusId" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="timeStamp" type="{http://www.w3.org/2001/XMLSchema}long"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -33,22 +34,31 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class StatusInfo {
 
-    protected int statusId;
+    @XmlElement(required = true)
+    protected String statusId;
     protected long timeStamp;
 
     /**
      * 获取statusId属性的值。
      * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public int getStatusId() {
+    public String getStatusId() {
         return statusId;
     }
 
     /**
      * 设置statusId属性的值。
      * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public void setStatusId(int value) {
+    public void setStatusId(String value) {
         this.statusId = value;
     }
 

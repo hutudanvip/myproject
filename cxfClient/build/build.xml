@@ -17,7 +17,7 @@
          <arg value="-client"/>
          <arg value="-d"/>
          <arg value="../src"/>
-        <arg value="http://localhost:9090/financManager/webservice/claimsInterService?wsdl"/>
+        <arg value="http://10.224.72.141:8081/nhr/ws/personalLoanService?wsdl"/>
       	 <!-- <arg value="http://10.224.64.53:8881/claim/webservice/MobileFsscService?wsdl "/>-->
       	
       	<classpath>
