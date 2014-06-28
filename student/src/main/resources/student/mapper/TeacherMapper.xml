@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="teacher">
+	
+	<!-- 数据库字段和Bean对象字段映射 -->
+	 <resultMap id="teacherMap" type="teacher">
+		<result property="id" column="fid"/>
+		<result property="number" column="fnumber"/>
+		<result property="createTime" column="fcreateTime"/>
+		<result property="lastUpdateTime" column="flastUpdateTime"/>
+		<result property="describe" column="fdescribe"/>
+		
+		<result property="name" column="fname"/>
+		<result property="leaveTime" column="fleaveTime"/>
+		<result property="inTime" column="finTime"/>
+		<result property="iseffective" column="fiseffective"  />
+		<result property="cellphone" column="fcellphone"/>
+		
+	 </resultMap>
+
+	<sql id="teacherColumn">
+		fid,
+		fdescribe,
+		flastupdatetime,
+		fnumber,
+		fcreatetime,
+		
+		fname,
+		fcellphone,
+		finTime,
+		fiseffective,
+		fleaveTime
+	</sql>
+	
+	<!-- 增加 -->
+	<insert id="insert" parameterType="teacher">
+		insert into t_hi_teacher 
+		(<include refid="teacherColumn"/>)
+		values
+		(
+			uuid(),
+			#{describe jdbcType=VARCHAR},
+			now(),
+			#{number jdbcType=VARCHAR},
+			now(),
+
+			#{name jdbcType=VARCHAR},
+			#{cellphone jdbcType=VARCHAR},
+			#{inTime jdbcType=DATE},
+			1,
+			#{leaveTime jdbcType=DATE}
+		)
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="update" parameterType="teacher">
+		update t_hi_teacher t
+		<set>
+			<if test="name !=null and name != '' ">
+				fname = #{name},
+			</if>
+			<if test="number !=null and number != '' ">
+				fnumber = #{number},
+			</if>
+			<if test="describe !=null and describe != '' ">
+				fdescribe = #{describe},
+			</if>
+			<if test="cellphone !=null and cellphone != '' ">
+				fcellphone = #{cellphone},
+			</if>
+			<if test="inTime !=null and inTime != '' ">
+				finTime = #{inTime},
+			</if>
+			<if test="leaveTime !=null and leaveTime != '' ">
+				fleaveTime = #{leaveTime},
+			</if>
+			<if test="iseffective !=null and iseffective != '' ">
+				fiseffective = #{iseffective},
+			</if>
+			flastupdatetime = now()
+		</set>
+		
+		<where>
+			fid = #{id}
+		</where>
+	</update>
+	
+	<!-- 查询  可能返回多个结果-->
+	<select id="selectAll" resultType="java.util.List" resultMap="teacherMap">
+		select *
+		from t_hi_teacher
+	</select>
+	
+	<!-- 查询有效数据  可能返回多个结果-->
+	<select id="selectAllEffec" resultType="java.util.List" resultMap="teacherMap">
+		select *
+		from t_hi_teacher where fiseffective = 1
+	</select>
+	
+	<!-- 作废 -->
+	<update id="repeal">
+		update t_hi_teacher set fiseffective = 0 where fiseffective = 1 and fid = #{id}
+	</update>
+	
+</mapper>

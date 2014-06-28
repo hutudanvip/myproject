@@ -1,0 +1,6 @@
+1、启动tomcat 时总是报错Unable to load configuration struts-plugin.xml
+检查struts.xml文件，<package name="student" namespace="/kaixindao" extends="struts-default">
+2、JSP页面<form id="login" action="${pageContext.request.contextPath}/kaixindao/login.action" method="post" namespace="kaixindao">
+标签提示错误时，需要将tomcat中的两个jar引入到项目中servlet-api.jar、jsp-api.jar
+3、使用json-default时，总是提示找不到action，发现属于没有添加插件表（struts2-json-plugin.jar、javassist）
+4、后台代码跑两边以及前台打开窗口的按钮只能点一次的问题。后台代码跑两遍是因为structs action访问时会先跑所有的get方法，然后再跑一遍action调用的方法，我的方法取名都是以get开头，所以每个方法跑了两遍

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" " http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="student">
+
+	<select id="select" resultType="student" resultMap="studentMap">
+		
+		select
+		stu.*,g.fname g_name, t.fname t_name
+		from t_hi_student stu
+		left join t_hi_grades g on
+			g.fid = stu.fgradeid
+		left join t_hi_term t on 
+			t.fid = stu.ftermid
+		<where>
+			<if test="number != null and number != '' ">
+				and stu.fnum = #{number}
+			</if>
+				
+			<if test="number == null or number == ''">
+								
+				<!-- 其次是根据姓名以及其他条件查询-->	
+				<if test="name != null and name != ''">
+					and stu.fname = #{name}
+				</if>
+				<if test="queryType != null and queryType != '' ">
+					<!--查询该月新进学员  -->
+					<if test="queryType == 'new' ">
+						<![CDATA[
+							and stu.fcreateTime >= #{beginTime}
+							and stu.fcreateTime < #{endTime}
+							and stu.fiseffective = 1
+							and stu.fgradeid = #{grade.id}
+						]]>
+					</if>
+					
+					<!--查询该月退学学员 -->
+					<if test="queryType == 'out' ">
+						<![CDATA[
+							and stu.flastUpdateTime >= #{beginTime}
+							and stu.flastUpdateTime < #{endTime}
+							and stu.fiseffective = 0
+							and stu.fgradeid = #{grade.id}
+						]]>
+					</if>
+					
+					<!--查询该月在校学员  -->
+					<if test="queryType == 'in' ">
+						<![CDATA[
+							and stu.fcreateTime >= t.fbegintime
+							and stu.fcreateTime < #{endTime}
+							and t.fid = #{term.id}
+							and stu.fiseffective = 1
+							and stu.fgradeid = #{grade.id}
+						]]>
+					</if>
+				</if> 
+
+			</if>
+			
+		</where>
+	
+	</select>
+
+	<insert id="insert" parameterType="student">
+		insert into t_hi_student(fid,
+		fname, fnum, fcreateTime, fdescribe, fiseffective,
+		faddress,
+		fcellphone, fgenearchName, frelation, fage, fgender,
+		fintime, fgradeid, ftermid)
+		values
+		(
+		uuid(), #{name}, #{number}, now(), #{describe}, 1,
+		#{address}, #{cellphone}, #{genearchName}, #{relation}, #{age},
+		#{gender},
+		#{intime},#{grade.id}, #{term.id}
+		)
+	</insert>
+	
+	<!-- 作废-->
+	<update id="repeal" parameterType="student">
+		update t_hi_student t set t.fiseffective = 0 where t.fid = #{id}
+	</update>
+
+	<update id="update" parameterType="student">
+		<![CDATA[
+			update t_hi_student t
+		]]>
+		<set>
+			t.fname = #{name},
+			t.flastUpdateTime = now(),
+			t.fiseffective =
+			#{iseffective},
+			t.fage = #{age},
+			t.fgender = #{gender},
+			t.fintime =
+			#{intime},
+			t.fgradeid = #{grade.id},
+			t.fcellphone = #{cellphone},
+			t.faddress = #{address},
+			t.fgenearchName = #{genearchName},
+			t.frelation = #{relation},
+
+			<if test="describe != null and describe != '' ">
+				t.fdescribe = #{describe},
+			</if>
+		</set>
+		<where>
+			t.fnum = #{number} and t.fiseffective = 1
+		</where>
+	</update>
+
+	<!-- 数据库字段和Bean对象字段映射 -->
+	<resultMap id="studentMap" type="student">
+		<result property="id" column="fid" javaType="String" />
+		<result property="name" column="fname" javaType="String" />
+		<result property="number" column="fnum" />
+		<result property="createTime" column="fcreateTime" javaType="Date" />
+		<result property="lastUpdateTime" column="flastUpdateTime" javaType="Date"/> 
+
+		<result property="describe" column="fdescribe" javaType="String" />
+		<result property="iseffective" column="fiseffective"  />
+		<result property="address" column="faddress" javaType="String" />
+		<result property="cellphone" column="fcellphone" javaType="String" />
+
+		<result property="genearchName" column="fgenearchName"
+			javaType="String" />
+		<result property="relation" column="frelation" javaType="String" />
+		<result property="age" column="fage" javaType="int" />
+		<result property="gender" column="fgender" javaType="int" />
+		<result property="intime" column="fintime" javaType="Date" />
+
+		<association property="grade" column="fgradeid"
+			javaType="com.student.domain.Grades" columnPrefix="g_">
+			<id property="id" column="id" />
+			<result property="name" column="name" />
+		</association>
+		
+		<association property="term" column="ftermid"
+			javaType="com.student.domain.Term" columnPrefix="t_">
+			<id property="id" column="id" />
+			<result property="name" column="name" />
+		</association>
+	</resultMap>
+</mapper>
+

@@ -1,0 +1,73 @@
+student项目脚本
+--创建学生表
+create table t_kx_student(fid varchar(44) primary key, fname varchar(20), fnum varchar(8));
+
+insert into t_kx_student(fid,fnum,fname) values('0001','0001','张三');
+
+select * from t_kx_student;
+
+--创建学生表
+CREATE TABLE `t_hi_children2` (
+  `fid` varchar(80) NOT NULL,
+  `fnumber` varchar(20) NOT NULL,
+  `fchildName` varchar(20) DEFAULT NULL,
+  `fcreatetime` date DEFAULT NULL,
+  `flastUpdateTime` date DEFAULT NULL,
+  `fdescribe` varchar(200) DEFAULT NULL,
+  `fchildGender` int(1) DEFAULT NULL,
+  `fchildAge` int(2) DEFAULT NULL,
+  `fbelongClass` varchar(80) DEFAULT NULL,
+  `fbeginTime` date DEFAULT NULL,
+  `fparentName` varchar(20) DEFAULT NULL,
+  `fcellphone` varchar(11) DEFAULT NULL,
+  `ftelphone` varchar(8) DEFAULT NULL,
+  `faddress` varchar(200) DEFAULT NULL,
+  `fleaved` int(1) DEFAULT NULL,
+  PRIMARY KEY (`fid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--创建费用表
+DROP TABLE IF EXISTS `t_hi_expense`;
+CREATE TABLE `t_hi_expense` (
+  `fid` varchar(80) NOT NULL,
+  `fnumber` varchar(20) DEFAULT NULL,
+  `fcreataTime` date DEFAULT NULL,
+  `flastUpdateTime` date DEFAULT NULL,
+  `fdescribe` varchar(200) DEFAULT NULL,
+  `ftuition` int(4) DEFAULT NULL,
+  `flivingCost` int(4) DEFAULT NULL,
+  `fotherCost` int(4) DEFAULT NULL,
+  `ftranChange` int(4) DEFAULT NULL,
+  `fbookCost` int(4) DEFAULT NULL,
+  `feffected` int(1) DEFAULT NULL,
+  PRIMARY KEY (`fid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--创建班级表
+DROP TABLE IF EXISTS `t_hi_grades`;
+CREATE TABLE `t_hi_grades` (
+  `fid` varchar(80) NOT NULL,
+  `fname` varchar(40) NOT NULL,
+  `fdescribe` varchar(200) DEFAULT NULL,
+  `flastupdateTime` date DEFAULT NULL,
+  `fnumber` varchar(20) DEFAULT NULL,
+  `fcreatetime` date DEFAULT NULL,
+  PRIMARY KEY (`fid`),
+  KEY `fid` (`fid`)
+) ENGINE=InnoDB DEFAULT CHARSET=gb2312;
+
+--创建教师表
+DROP TABLE IF EXISTS `t_hi_teacher`;
+CREATE TABLE `t_hi_teacher` (
+  `fid` varchar(80) NOT NULL,
+  `fnumber` varchar(20) NOT NULL,
+  `fname` varchar(20) NOT NULL,
+  `fcreatetime` date DEFAULT NULL,
+  `flastUpdateTime` date DEFAULT NULL,
+  `fdescribe` varchar(200) DEFAULT NULL,
+  `fmagClass` varchar(80) DEFAULT NULL,
+  `finTime` date DEFAULT NULL,
+  `fsalary` int(10) DEFAULT NULL,
+  `fonTheJob` int(1) DEFAULT NULL,
+  PRIMARY KEY (`fid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
