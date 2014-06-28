@@ -7,7 +7,7 @@
 <body>
 	求代数和
 	<br>
-	<s:form action="mystruts/sum.action">
+	<s:form action="sum" namespace="/mystruts">
 		<s:textfield name="operate1" label="操作数1"></s:textfield>
 		<s:textfield name="operate2" label="操作数2"></s:textfield>
 		<s:submit value="代数和"></s:submit>
