@@ -1,0 +1,111 @@
+1、代垫款接口联调（已完成）
+2、代垫款功能对照(已完成)
+
+3、发票与报账接口文档编写(已完成)
+4、发票与UUMS接口资料咨询（已完成）
+
+5、利润表与财务7.0系统对接功能了解
+
+6、OA待办跳转到具体界面（已完成）
+7、获取事业大区（已完成）
+
+8、讨论基础数据修改为服务模式的影响(已完成)采用原有的UUMS推送模式
+
+9、发票接口层环境搭建
+
+10、发票系统文档上传和下载DLP加密（已确定可以根据系统进程实现，无须开发。税友进程为：EPPortal.exe）
+
+11、了解ORACLE递归 connect by prior 
+
+12、发票系统周边系统接口梳理
+
+13、代垫款代码走读（已完成）
+
+
+每月回收率变动报表（perMonthReport/perMonthReport.jsp）
+select * from t_auth_function f where f.functionname like '%每月回收率变动报表%';
+
+
+STRUTS2开发环境搭建
+1、导入struts2的JAR包
+	struts2-core-2.0.11.1.jar
+	xwork-2.0.4.jar
+	commons-logging-1.0.4.jar
+	freemarker-2.3.8.jar
+	ognl-2.6.11.jar
+2、配置web.xml
+	<filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>
+			org.apache.struts2.dispatcher.FilterDispatcher
+		</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+3、编写Action，
+需要继承com.opensymphony.xwork2.ActionSupport或者继承com.deppon.foss.framework.server.web.action.AbstractAction
+4、配置Action
+	在struts.xml文件中进行配置，具体如下
+	<?xml version="1.0" encoding="UTF-8" ?>
+	<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+	<struts>
+		<package name="struts2" namespace="/mystruts"
+			extends="struts-default">
+			<action name="sum" class="action.FirstAction">
+				<result name="positive">/positive.jsp</result>
+				<result name="negative">/negative.jsp</result>
+			</action>
+		</package>
+	</struts>
+	在<struts>标签中可以有多个<package>，第一个<package>可以指定一个Servlet访问路径
+	（不包括动作名），如“/mystruts”。extends属性继承一个默认的配置文件“struts-default”，
+	一般都继承于它，大家可以先不去管它。<action>标签中的name属性表示动作名，class表
+	示动作类名。
+	<result>标签的name实际上就是execute方法返回的字符串，如果返回的是“positive”，
+	就跳转到positive.jsp页面，如果是“negative”，就跳转到negative.jsp页面。在<struts>中
+	可以有多个<package>，在<package>中可以有多个<action>。我们可以用如下的URL来访
+	问这个动作：
+	http://localhost:8080/struts2/mystruts/sum.action
+
+5、全局result
+有很多时候一个<result>初很多<action>使用，这时可以使用<global-results>标签来定义全
+局的<result>
+<struts>
+	<package name="demo" extends="struts-default">
+		<global-results>
+			<result name="print">/result.jsp</result>
+		</global-results>
+		<action name="submit" class="action.MoreSubmitAction">
+		</action>
+		<action name="my" class="action.MoreSubmitAction" method="my">
+		</action>
+	</package>
+</struts>
+如果<action>中没有相应的<result>，Struts2就会使用全局的<result>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

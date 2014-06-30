@@ -16,5 +16,15 @@
 			<result name="input">/validate.jsp</result>
 			<result name="success">/validate.jsp</result>
 		</action>
+		
+		<!-- 单个文件上传 -->
+		<action name="uploadFile" class="com.deppon.struts.action.UploadAction">
+			<result name="success">/success.jsp</result>
+		</action>
+		
+		<!-- 多个文件上传 -->
+		<action name="uploadFiles" class="com.deppon.struts.action.UploadMoreAction">
+			<result name="success">/success.jsp</result>
+		</action>
 	</package>
 </struts>
