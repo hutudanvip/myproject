@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+--><!-- The contents of this file will be loaded for each web application --><Context>
+
+    <!-- Default set of monitored resources -->
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+	
+    <!-- Uncomment this to disable session persistence across Tomcat restarts -->
+    <!--
+    <Manager pathname="" />
+    -->
+
+    <!-- Uncomment this to enable Comet connection tacking (provides events
+         on session expiration as well as webapp lifecycle) -->
+    <!--
+    <Valve className="org.apache.catalina.valves.CometConnectionManagerValve" />
+    -->
+	
+	 
+	<Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" maxActive="18" maxIdle="14" name="jdbc/fossds" password="finmanager" type="javax.sql.DataSource" url="jdbc:oracle:thin:@192.168.17.209:1521:finance" username="finmanager"/>
+
+	<!--  <Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" maxActive="18" maxIdle="14" name="jdbc/fossds" password="finmanager" type="javax.sql.DataSource" url="jdbc:oracle:thin:@10.226.130.103:1521:orcl" username="finmanager"/>-->
+
+	<!-- 
+	<Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" maxActive="18" maxIdle="14" name="jdbc/fossds" password="finmanager" type="javax.sql.DataSource" url="jdbc:oracle:thin:@192.168.20.58:1521:finance" username="finmanager"/>-->
+				
+	<Resource CHAN="CHANNEL.FOSS.TEST" HOST="192.168.17.102" PORT="1416" QMGR="QM_FOSS_TEST" TRAN="1" auth="Container" description="JMS Queue Connection Factory for sending messages" factory="com.ibm.mq.jms.MQQueueConnectionFactoryFactory" name="jms/queueManager" type="com.ibm.mq.jms.MQQueueConnectionFactory"/>
+	<Resource QU="QU_FOSS_EXCEPTION_LOG_IN" auth="Container" description="JMS Queue for receiving messages from Dialog" factory="com.ibm.mq.jms.MQQueueFactory" name="jms/exception" type="com.ibm.mq.jms.MQQueue"/>
+	<Resource QU="QU_FOSS_PERFORMANCE_LOG_IN" auth="Container" description="JMS Queue for receiving messages from Dialog" factory="com.ibm.mq.jms.MQQueueFactory" name="jms/performance" type="com.ibm.mq.jms.MQQueue"/>
+
+
+	<Resource CHAN="FIN_SELF.CLIENT" HOST="192.168.20.219" PORT="2428" QMGR="QM_APPD" TRAN="1" auth="Container" description="JMS Queue Connection Factory for sending messages" factory="com.ibm.mq.jms.MQQueueConnectionFactoryFactory" name="jms/foss/APPMQ" type="com.ibm.mq.jms.MQQueueConnectionFactory"/>
+	<!-- 客户端接收响应队列 -->
+	<Resource QU="QU_FIN_SELF_RESPONSE_COM_IN" auth="Container" description="JMS Queue for receiving messages from Dialog" factory="com.ibm.mq.jms.MQQueueFactory" name="jms/foss/fin/INNTFPB" type="com.ibm.mq.jms.MQQueue"/>
+	<!-- 客户端发送请求队列 -->
+	<Resource QU="RQ_FIN_SELF_REQUEST_COM_OUT" auth="Container" description="JMS Queue for receiving messages from Dialog" factory="com.ibm.mq.jms.MQQueueFactory" name="jms/foss/fin/OUTNTFPB" type="com.ibm.mq.jms.MQQueue"/>
+	<!-- 服务端接收请求队列 -->
+	<Resource QU="QU_FIN_SELF_REQUEST_COM_IN" auth="Container" description="JMS Queue for receiving messages from Dialog" factory="com.ibm.mq.jms.MQQueueFactory" name="jms/foss/finRel/INNTFPB" type="com.ibm.mq.jms.MQQueue"/>
+	<!-- 服务端发送响应队列 -->
+	<Resource QU="RQ_FIN_SELF_RESPONSE_COM_OUT" auth="Container" description="JMS Queue for receiving messages from Dialog" factory="com.ibm.mq.jms.MQQueueFactory" name="jms/foss/finRel/OUTNTFPB" type="com.ibm.mq.jms.MQQueue"/>
+	<!-- 状态队列管理器 -->
+	<Resource QU="RQ_ESB_STATUS" auth="Container" description="JMS Queue for receiving messages from Dialog" factory="com.ibm.mq.jms.MQQueueFactory" name="jms/foss/finStatus/OUT" type="com.ibm.mq.jms.MQQueue"/>
+	
+	<!-- 异常队列管理器 -->
+	<Resource QU="RQ_ESB_EXCEPTION" auth="Container" description="JMS Queue for receiving messages from Dialog" factory="com.ibm.mq.jms.MQQueueFactory" name="jms/foss/finException/OUT" type="com.ibm.mq.jms.MQQueue"/>
+
+</Context>

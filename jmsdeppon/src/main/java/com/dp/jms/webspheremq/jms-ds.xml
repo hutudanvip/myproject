@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<connection-factories>
+
+	<!-- ==================================================================== -->
+	<!-- JMS Stuff -->
+	<!-- ==================================================================== -->
+
+	<!-- The JMS provider loader. Currently pointing to a non-clustered ConnectionFactory. 
+		Need to be replaced with a clustered non-load-balanced ConnectionFactory 
+		when it becomes available. See http://jira.jboss.org/jira/browse/JBMESSAGING-843. -->
+	<mbean code="org.jboss.jms.jndi.JMSProviderLoader"
+		name="jboss.messaging:service=JMSProviderLoader,name=JMSProvider">
+		<attribute name="ProviderName">DefaultJMSProvider</attribute>
+		<attribute name="ProviderAdapterClass">org.jboss.jms.jndi.JNDIProviderAdapter
+		</attribute>
+		<attribute name="FactoryRef">java:/XAConnectionFactory</attribute>
+		<attribute name="QueueFactoryRef">java:/XAConnectionFactory</attribute>
+		<attribute name="TopicFactoryRef">java:/XAConnectionFactory</attribute>
+	</mbean>
+
+	<!-- JMS XA Resource adapter, use this to get transacted JMS in beans -->
+<!-- 	<tx-connection-factory>
+		<jndi-name>JmsXA</jndi-name>
+		<xa-transaction />
+		<rar-name>jms-ra.rar</rar-name>
+		<connection-definition>org.jboss.resource.adapter.jms.JmsConnectionFactory
+		</connection-definition>
+		<config-property name="SessionDefaultType" type="java.lang.String">javax.jms.Topic
+		</config-property>
+		<config-property name="JmsProviderAdapterJNDI" type="java.lang.String">java:/DefaultJMSProvider
+		</config-property>
+		<max-pool-size>20</max-pool-size>
+		<security-domain-and-application>JmsXARealm
+		</security-domain-and-application>
+		<depends>jboss.messaging:service=ServerPeer</depends>
+	</tx-connection-factory> -->
+
+	<tx-connection-factory>
+		<jndi-name>jms/APPMQ</jndi-name>
+		<xa-transaction />
+		<rar-name>wmq.jmsra.rar</rar-name>
+		<connection-definition>javax.jms.ConnectionFactory
+		</connection-definition>
+		<config-property name="channel" type="java.lang.String">SYSTEM.DEF.SVRCONN
+		</config-property>
+		<config-property name="hostName" type="java.lang.String">192.168.17.141
+		</config-property>
+		<config-property name="port" type="java.lang.String">1416
+		</config-property>
+		<config-property name="queueManager" type="java.lang.String">QMGRDEV_APP
+		</config-property>
+		<config-property name="transportType" type="java.lang.String">CLIENT
+		</config-property>
+		<config-property name="username" type="java.lang.String">mqm
+		</config-property>
+		<security-domain-and-application>JmsXARealm
+		</security-domain-and-application>
+		<min-pool-size>20</min-pool-size>
+		<max-pool-size>100</max-pool-size>
+	</tx-connection-factory>
+
+	<mbean code="org.jboss.resource.deployment.AdminObject" name="jca.wmq:name=wmq/foss/INNTFQueue">
+		<attribute name="JNDIName">jms/foss/INNTFPB</attribute>
+		<depends optional-attribute-name="RARName">jboss.jca:service=RARDeployment,name='wmq.jmsra.rar'
+		</depends>
+		<attribute name="Type">javax.jms.Queue</attribute>
+		<attribute name="Properties">
+			baseQueueManagerName=QMGRDEV_APP
+			baseQueueName=FOSS.REQUEST.IN.NTFPB
+			CCSID=1208
+		</attribute>
+	</mbean>
+
+	<mbean code="org.jboss.resource.deployment.AdminObject" name="jca.wmq:name=wmq/foss/OUTNTFQueue">
+		<attribute name="JNDIName">jms/foss/OUTNTFPB</attribute>
+		<depends optional-attribute-name="RARName">jboss.jca:service=RARDeployment,name='wmq.jmsra.rar'
+		</depends>
+		<attribute name="Type">javax.jms.Queue</attribute>
+		<attribute name="Properties">
+			baseQueueManagerName=QMGRDEV_APP
+			baseQueueName=FOSS.RESPONSE.OUT.NTFPB
+			CCSID=1208
+		</attribute>
+	</mbean>
+
+
+</connection-factories>
