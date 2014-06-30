@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema
+	targetNamespace="http://www.deppon.com/foss/module/advance/server/service/webservice/"
+	xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.deppon.com/foss/module/advance/server/service/webservice/">
+
+	<element name="synCarErrorRptRequest" type="tns:SynCarErrorRptRequest"></element>
+	<element name="synCarErrorRptResponse" type="tns:SynCarErrorRptResponse"></element>
+
+	<complexType name="SynCarErrorRptRequest">
+		<annotation>
+			<documentation>车辆差错上报信息</documentation>
+		</annotation>
+		<sequence>
+			<element name="claimInfo" type="tns:ClaimInfo" minOccurs="1"
+				maxOccurs="1">
+				<annotation>
+					<documentation>车辆差错实体</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="ClaimInfo">
+		<annotation>
+			<documentation>车辆差错实体对象</documentation>
+		</annotation>
+
+		<sequence>
+			<element name="errorCode" type="string">
+				<annotation>
+					<documentation>差错处理编号</documentation>
+				</annotation>
+			</element>
+			<element name="plateNum" type="string">
+				<annotation>
+					<documentation>车牌号</documentation>
+				</annotation>
+			</element>
+			<element name="accidentTime" type="dateTime">
+				<annotation>
+					<documentation>事故时间</documentation>
+				</annotation>
+			</element>
+			<element name="carType" type="string">
+				<annotation>
+					<documentation>车辆类型编码</documentation>
+				</annotation>
+			</element>
+			<element name="carTypeName" type="string">
+				<annotation>
+					<documentation>车辆类型名称</documentation>
+				</annotation>
+			</element>
+			<element name="errorType" type="string">
+				<annotation>
+					<documentation>交通事故差错类型</documentation>
+				</annotation>
+			</element>
+			<element name="errorTypeName" type="string">
+				<annotation>
+					<documentation>交通事故差错类型名称</documentation>
+				</annotation>
+			</element>
+			<element name="backCode" type="string">
+				<annotation>
+					<documentation>备案差错编号</documentation>
+				</annotation>
+			</element>
+			<element name="dutyStyle" type="string">
+				<annotation>
+					<documentation>责任确定方式</documentation>
+				</annotation>
+			</element>
+			<element name="dutyStyleName" type="string">
+				<annotation>
+					<documentation>责任确定方式名称</documentation>
+				</annotation>
+			</element>
+			<element name="dutyType" type="string">
+				<annotation>
+					<documentation>责任类型</documentation>
+				</annotation>
+			</element>
+			<element name="dutyTypeName" type="string">
+				<annotation>
+					<documentation>责任类型名称</documentation>
+				</annotation>
+			</element>
+			<element name="isAssessed" type="boolean">
+				<annotation>
+					<documentation>是否联系保险公司定损</documentation>
+				</annotation>
+			</element>
+			<element name="isTakeAssessed" type="boolean">
+				<annotation>
+					<documentation>是否已取得定损单</documentation>
+				</annotation>
+			</element>
+
+			<element name="ourAssessedCost" type="decimal">
+				<annotation>
+					<documentation>我方定损金额</documentation>
+				</annotation>
+			</element>
+
+			<element name="otherAssessedCost" type="decimal">
+				<annotation>
+					<documentation>对方定损金额</documentation>
+				</annotation>
+			</element>
+			<element name="ourIndemnity" type="decimal">
+				<annotation>
+					<documentation>我方赔款对方金额</documentation>
+				</annotation>
+			</element>
+			<element name="otherIndemnity" type="decimal">
+				<annotation>
+					<documentation>对方赔款我方金额</documentation>
+				</annotation>
+			</element>
+			<element name="insuranceCom" type="decimal">
+				<annotation>
+					<documentation>可向保险公司收回事故赔款金额</documentation>
+				</annotation>
+			</element>
+			<element name="accidentCost" type="decimal">
+				<annotation>
+					<documentation>事故费用</documentation>
+				</annotation>
+			</element>
+
+			<element name="driverNum" type="string">
+				<annotation>
+					<documentation>驾驶员工号</documentation>
+				</annotation>
+			</element>
+			<element name="driverName" type="string">
+				<annotation>
+					<documentation>驾驶员姓名</documentation>
+				</annotation>
+			</element>
+
+			<element name="driverDept" type="string">
+				<annotation>
+					<documentation>驾驶员部门</documentation>
+				</annotation>
+			</element>
+
+			<element name="reportTime" type="dateTime">
+				<annotation>
+					<documentation>上报时间</documentation>
+				</annotation>
+			</element>
+			<element name="reportDept" type="string">
+				<annotation>
+					<documentation>上报部门</documentation>
+				</annotation>
+			</element>
+			<element name="operateName" type="string">
+				<annotation>
+					<documentation>操作员姓名</documentation>
+				</annotation>
+			</element>
+			<element name="dutyCareerDept" type="string">
+				<annotation>
+					<documentation>责任事业部</documentation>
+				</annotation>
+			</element>
+			<element name="trackDept" type="string">
+				<annotation>
+					<documentation>事故跟踪处理部门</documentation>
+				</annotation>
+			</element>
+			<element name="accidentDesc" type="string">
+				<annotation>
+					<documentation>事故经过</documentation>
+				</annotation>
+			</element>
+			
+			<element name="shouldCollect" type="decimal">
+				<annotation>
+					<documentation>应收金额</documentation>
+				</annotation>
+			</element>
+			<element name="manageDept" type="string">
+				<annotation>
+					<documentation>经营本部</documentation>
+				</annotation>
+			</element>
+			<element name="dutyArea" type="string">
+				<annotation>
+					<documentation>责任大区</documentation>
+				</annotation>
+			</element>
+			
+		</sequence>
+
+	</complexType>
+
+	<complexType name="SynCarErrorRptResponse">
+		<annotation>
+			<documentation>车辆差错信息同步响应信息</documentation>
+		</annotation>
+		<sequence>
+			<element name="isSucess" type="boolean">
+				<annotation>
+					<documentation>是否同步成功</documentation>
+				</annotation>
+			</element>
+			<element name="failReason" type="string">
+				<annotation>
+					<documentation>失败原因</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+
+</schema>

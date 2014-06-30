@@ -1,0 +1,44 @@
+.add {
+	background-image: url(../images/add.gif) !important
+}
+
+.edit {
+	background-image: url(../images/tbtn_edit.gif) !important
+}
+
+.delete {
+	background-image: url(../images/delete.gif) !important
+}
+
+.export {
+	background-image: url(../images/tbtn_importexcel.gif) !important
+}
+
+.tbtn_check {
+	background-image: url(../images/tbtn_check.gif) !important
+}
+
+.upload {
+	background-image: url(../images/tbtn_open.gif) !important
+}
+
+.tbtn_refresh {
+	background-image:url(../images/tbtn_Refresh.gif) !important
+}
+
+.tbtn_save {
+	background-image:url(../images/tbtn_Save.gif) !important
+}
+
+.tbtn_filter {
+	background-image:url(../images/tbtn_Filter.gif) !important
+}
+
+.tbtn_blankout {
+	background-image:url(../images/tbtn_Blankout.gif) !important
+}
+
+/*重置*/
+.tbtn_Clear {
+	background-image:url(../images/tbtn_Clear.gif) !important
+}
