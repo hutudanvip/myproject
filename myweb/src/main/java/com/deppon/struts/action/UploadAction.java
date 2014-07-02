@@ -39,6 +39,15 @@ public class UploadAction extends ActionSupport
     {
         return this.uploadContentType;
     }
+    
+    /**
+     * 
+    	 * 作者：051781
+    	 * 功能：文件上传
+    	 * 时间：2014-6-30下午4:15:24
+    	 * param:
+    	 * return：
+     */
     public String execute() throws Exception
     {   
         java.io.InputStream is = new java.io.FileInputStream(upload);

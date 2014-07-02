@@ -5,6 +5,18 @@
 <struts>
 	<package name="struts2" namespace="/mystruts" extends="struts-default">
 
+		<!-- 自定义拦截器 -->
+		<interceptors>
+			<!--action自定义拦截器  -->
+			<interceptor name="method" class="com.deppon.struts.interceptor.MultiMethodInterceptor"/>
+			<!-- 拦截器栈 -->
+			<interceptor-stack name="methodStack">
+				<interceptor-ref name="method"/>
+				<!-- 必须要引用defaultStack，否则很多通过拦截器提供的功能将失去 -->
+				<interceptor-ref name="defaultStack"/>
+			</interceptor-stack>
+		</interceptors>
+		
 		<!-- 求和 -->
 		<action name="sum" class="com.deppon.struts.action.FirstAction">
 			<result name="positive">/postitive.jsp</result>
@@ -20,11 +32,22 @@
 		<!-- 单个文件上传 -->
 		<action name="uploadFile" class="com.deppon.struts.action.UploadAction">
 			<result name="success">/success.jsp</result>
+			<!-- 参数设置set -->
+			<interceptor-ref name="params" />
+			<!-- 拦截器， 记录该方法执行的时间 -->
+			<interceptor-ref name="timer"/>
+			<!-- 拦截器， 记录日志 -->
+			<interceptor-ref name="logger"/>
 		</action>
 		
 		<!-- 多个文件上传 -->
 		<action name="uploadFiles" class="com.deppon.struts.action.UploadMoreAction">
 			<result name="success">/success.jsp</result>
+		</action>
+		
+		<!-- 自定义拦截器 -->
+		<action name="interception" class="com.deppon.struts.action.InterceptorAction" method="abcd">
+			<interceptor-ref name="methodStack"/>
 		</action>
 	</package>
 </struts>
