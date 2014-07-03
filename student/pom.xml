@@ -35,11 +35,8 @@
 			<version>1.1.1</version>
 		</dependency>
 
-<!-- 		<dependency>
-			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc14</artifactId>
-			<version>10.2.0.1.0</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>com.oracle</groupId> <artifactId>ojdbc14</artifactId> 
+			<version>10.2.0.1.0</version> </dependency> -->
 
 		<dependency>
 			<groupId>mysql</groupId>
@@ -106,7 +103,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
-			<version>3.0.5.RELEASE</version>
+			<version>${org.springframework.version}</version>
 		</dependency>
 		<!-- Object-to-Relation-Mapping (ORM) integration with Hibernate, JPA, 
 			and iBatis. (depends on spring-core, spring-beans, spring-context, spring-tx) 
@@ -204,6 +201,13 @@
 			<groupId>net.sourceforge.jexcelapi</groupId>
 			<artifactId>jxl</artifactId>
 			<version>2.6.12</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 
