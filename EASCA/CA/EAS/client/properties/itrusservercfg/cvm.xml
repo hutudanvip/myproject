@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="GB2312"?>
+<CVMConfig>
+	<CRLContext>
+		<RetryPolicy>0</RetryPolicy>
+		<NotCheckCRL>true</NotCheckCRL>
+		<CaFileName>cafiles\ca.cer</CaFileName>
+		<CrlUrl>e:\ca.crl</CrlUrl>
+	</CRLContext>
+</CVMConfig>

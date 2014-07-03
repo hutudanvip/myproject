@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="GBK"?>
+
+<Config>
+  <ITRUSAPI>
+    <DefaultKeyPin>1234</DefaultKeyPin>
+    <RememberPin>true</RememberPin>
+    <Providers>
+		<Provider key="ePass3000" value="ngp11v211.dll" name="ePassNG_RSA"></Provider>
+    </Providers>
+  </ITRUSAPI>
+</Config>

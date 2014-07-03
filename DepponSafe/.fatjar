@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Mon Mar 18 16:57:27 CST 2013
+onejar.license.required=false
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=true
+jarname=D\:\\DepponSafe_fat.jar
+manifest.mergeall=true
+manifest.mainclass=com.esafenet.ui.WinMainUi
+manifest.file=<createnew>
+jarname.isextern=true
+onejar.expand=
+excludes=
+includes=
