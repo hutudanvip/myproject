@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema
+	targetNamespace="http://www.deppon.com/fims/inter/fssc/service/webservice/"
+	xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.deppon.com/fims/inter/fssc/service/webservice/">
+
+	<element name="synTaxCostTypeRequest" type="tns:SynTaxCostTypeRequest"></element>
+	<element name="synTaxCostTypeResponse" type="tns:SynTaxCostTypeResponse"></element>
+
+	<complexType name="SynTaxCostTypeRequest">
+		<annotation>
+			<documentation>进项税费用类型同步请求</documentation>
+		</annotation>
+		<sequence>
+			<element name="taxCostTypeInfo" type="tns:TaxCostTypeInfo" minOccurs="1"
+				maxOccurs="1">
+				<annotation>
+					<documentation>进项税费用类型实体</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="TaxCostTypeInfo">
+		<annotation>
+			<documentation>进项税费用类型实体</documentation>
+		</annotation>
+
+		<sequence>
+			<element name="code" type="string" minOccurs="1"	maxOccurs="1">
+				<annotation>
+					<documentation>费用类型编码</documentation>
+				</annotation>
+			</element>
+			<element name="name" type="string" minOccurs="1"	maxOccurs="1">
+				<annotation>
+					<documentation>费用类型名称</documentation>
+				</annotation>
+			</element>
+			<element name="workflow" type="string" minOccurs="1"	maxOccurs="1">
+				<annotation>
+					<documentation>所属工作流</documentation>
+				</annotation>
+			</element>
+			<element name="template" type="string" minOccurs="1"	maxOccurs="1">
+				<annotation>
+					<documentation>所属模板</documentation>
+				</annotation>
+			</element>
+			<element name="isShouldGetBill" type="boolean" minOccurs="1"	maxOccurs="1">
+				<annotation>
+					<documentation>是否应取得增票</documentation>
+				</annotation>
+			</element>
+						
+		</sequence>
+
+	</complexType>
+
+	<complexType name="SynTaxCostTypeResponse">
+		<annotation>
+			<documentation>进项税费用类型信息同步响应信息</documentation>
+		</annotation>
+		<sequence>
+			<element name="isSucess" type="boolean">
+				<annotation>
+					<documentation>是否同步成功（1表示成功，0表示失败）</documentation>
+				</annotation>
+			</element>
+			<element name="failReason" type="string">
+				<annotation>
+					<documentation>失败原因，成功时该值为success</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+
+</schema>

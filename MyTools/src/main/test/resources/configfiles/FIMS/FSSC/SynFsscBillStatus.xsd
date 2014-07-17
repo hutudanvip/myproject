@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.deppon.com/fims/inter/fssc/service/webservice/"
+	xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.deppon.com/fims/inter/fssc/service/webservice/">
+
+	<element name="synFsscBillStatusRequest" type="tns:SynFsscBillStatusRequest"></element>
+	<element name="synFsscBillStatusResponse" type="tns:SynFsscBillStatusResponse"></element>
+
+	<!-- Request START -->
+	<complexType name="SynFsscBillStatusRequest">
+		<annotation>
+			<documentation>报账申请单审批状态同步请求</documentation>
+		</annotation>
+		<sequence>
+			<element name="billNum" type="string" minOccurs="1"
+				maxOccurs="1">
+				<annotation>
+					<documentation>单据编号</documentation>
+				</annotation>
+			</element>
+			<element name="billStatus" type="string" minOccurs="1"
+				maxOccurs="1">
+				<annotation>
+					<documentation>流程状态</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<!-- Request END -->
+
+	<!-- Response开始 -->
+	<complexType name="SynFsscBillStatusResponse">
+		<annotation>
+			<documentation>报账申请单审批状态同步响应信息</documentation>
+		</annotation>
+		<sequence>
+			<element name="isSucess" type="boolean">
+				<annotation>
+					<documentation>是否同步成功（1表示成功，0表示失败）</documentation>
+				</annotation>
+			</element>
+			<element name="failReason" type="string">
+				<annotation>
+					<documentation>失败原因，成功时该值为success</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<!-- Response结束 -->
+
+</schema>

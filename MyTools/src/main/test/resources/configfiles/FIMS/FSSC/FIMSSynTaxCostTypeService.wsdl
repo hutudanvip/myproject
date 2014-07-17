@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://www.deppon.com/fims/inter/fssc/service/webservice/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	name="ISynTaxCostTypeService" targetNamespace="http://www.deppon.com/fims/inter/fssc/service/webservice/"
+	xmlns:tns_domain="http://www.deppon.com/fims/inter/fssc/service/webservice/"
+	xmlns:tns_header="http://www.deppon.com/esb/header"
+	xmlns:tns_exception="http://www.deppon.com/esb/exception">
+	<wsdl:documentation>进项税费用类型信息同步接口</wsdl:documentation>
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://www.deppon.com/fims/inter/fssc/service/webservice/">
+			<xsd:include schemaLocation="FIMS_SYN_TAXCOSTTYPE.xsd" />
+		</xsd:schema>
+		<xsd:schema targetNamespace="http://www.deppon.com/esb/header">
+			<xsd:include schemaLocation="ESBHeader.xsd" />
+		</xsd:schema>
+		<xsd:schema targetNamespace="http://www.deppon.com/esb/exception">
+			<xsd:include schemaLocation="CommonException.xsd" />
+		</xsd:schema>
+	</wsdl:types>
+
+	<wsdl:message name="ESBHeader">
+		<wsdl:part element="tns_header:esbHeader" name="header" />
+	</wsdl:message>
+
+	<wsdl:message name="CommException">
+		<wsdl:part name="CommException" element="tns_exception:commonExceptionInfo" />
+	</wsdl:message>
+
+
+	<wsdl:message name="synTaxCostTypeRequest">
+		<wsdl:part name="request" element="tns_domain:synTaxCostTypeRequest">
+		</wsdl:part>
+		<wsdl:part name="esbHeader" element="tns_header:esbHeader" />
+	</wsdl:message>
+	<wsdl:message name="synTaxCostTypeResponse">
+		<wsdl:part name="response" element="tns_domain:synTaxCostTypeResponse">
+		</wsdl:part>
+		<wsdl:part name="esbHeader" element="tns_header:esbHeader" />
+	</wsdl:message>
+	<wsdl:message name="synTaxCostTypeFault">
+		<wsdl:part name="CommException" element="tns_exception:commonExceptionInfo"></wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="ISynTaxCostType">
+		<wsdl:documentation>车辆差错信息同步接口</wsdl:documentation>
+		<wsdl:operation name="synTaxCostType">
+			<wsdl:input message="tns:synTaxCostTypeRequest" />
+			<wsdl:output message="tns:synTaxCostTypeResponse" />
+			<wsdl:fault name="CommException" message="tns:CommException" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="ISynTaxCostTypeServiceSoapBinding" type="tns:ISynTaxCostType">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="synTaxCostType">
+			<soap:operation
+				soapAction="http://www.deppon.com/fims/inter/fssc/service/webservice/SynTaxCostTypeService" />
+			<wsdl:input>
+				<soap:header use="literal" part="esbHeader"
+					message="tns:synTaxCostTypeRequest" />
+				<soap:body use="literal" parts="request" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:header use="literal" part="esbHeader"
+					message="tns:synTaxCostTypeResponse" />
+				<soap:body use="literal" parts="response" />
+			</wsdl:output>
+			<wsdl:fault name="CommException">
+				<soap:fault use="literal" name="CommException" />
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="ISynTaxCostTypeService">
+		<wsdl:port binding="tns:ISynTaxCostTypeServiceSoapBinding" name="ISynTaxCostTypeServicePort">
+			<soap:address location="http://www.deppon.com/fims/inter/fssc/service/webservice/SynTaxCostTypeService" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

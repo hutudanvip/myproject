@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.deppon.com/fims/inter/fssc/service/webservice/"
+	xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.deppon.com/fims/inter/fssc/service/webservice/">
+
+	<element name="synFsscBillRequest" type="tns:SynFsscBillRequest"></element>
+	<element name="synFsscBillResponse" type="tns:SynFsscBillResponse"></element>
+
+	<!-- Request	 START -->
+	<complexType name="SynFsscBillRequest">
+		<annotation>
+			<documentation>报账申请单信息同步请求</documentation>
+		</annotation>
+		<sequence>
+			<element name="fsscBillInfo" type="tns:FsscBillInfo"
+				minOccurs="1" maxOccurs="1">
+				<annotation>
+					<documentation>报账申请单实体</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<!-- Request	 END -->
+
+	<!-- 报账申请单开始 -->
+	<complexType name="FsscBillInfo">
+		<annotation>
+			<documentation>报账申请单实体</documentation>
+		</annotation>
+
+		<sequence>
+			<element name="billNum" type="string" minOccurs="1"
+				maxOccurs="1">
+				<annotation>
+					<documentation>单据编号</documentation>
+				</annotation>
+			</element>
+			<element name="applyDate" type="dateTime" minOccurs="1"
+				maxOccurs="1">
+				<annotation>
+					<documentation>申请日期</documentation>
+				</annotation>
+			</element>
+			<element name="billStatus" type="string" minOccurs="1"
+				maxOccurs="1">
+				<annotation>
+					<documentation>流程状态</documentation>
+				</annotation>
+			</element>
+			<element name="accountComCode" type="string" minOccurs="1"
+				maxOccurs="1">
+				<annotation>
+					<documentation>做账公司编码</documentation>
+				</annotation>
+			</element>
+			<element name="accountComName" type="string" minOccurs="1"
+				maxOccurs="1">
+				<annotation>
+					<documentation>做账公司名称</documentation>
+				</annotation>
+			</element>
+			<element name="fsscBillDetailInfo" type="tns:FsscBillDetailInfo"
+				minOccurs="1">
+				<annotation>
+					<documentation>报账申请单明细实体</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<!-- 报账申请单结束 -->
+
+	<!-- 报账申请单明细实体开始 -->
+	<complexType name="FsscBillDetailInfo">
+		<annotation>
+			<documentation>报账申请单明细实体</documentation>
+		</annotation>
+
+		<sequence>
+			<element name="costTypeCode" type="string" minOccurs="1"
+				maxOccurs="1">
+				<annotation>
+					<documentation>费用类型编码</documentation>
+				</annotation>
+			</element>
+			<element name="costType" type="string" minOccurs="1"
+				maxOccurs="1">
+				<annotation>
+					<documentation>费用类型</documentation>
+				</annotation>
+			</element>
+			<element name="isShouldGetInvoice" type="boolean" minOccurs="1"
+				maxOccurs="1">
+				<annotation>
+					<documentation>是否应取得增票</documentation>
+				</annotation>
+			</element>
+			<element name="isShouldGetSpecialInvoice" type="boolean">
+				<annotation>
+					<documentation>是否增值税专用发票</documentation>
+				</annotation>
+			</element>
+			<element name="invoiceCode" type="string">
+				<annotation>
+					<documentation>发票号码</documentation>
+				</annotation>
+			</element>
+			<element name="includeTaxAmt" type="decimal" minOccurs="1"
+				maxOccurs="1">
+				<annotation>
+					<documentation>含税金额</documentation>
+				</annotation>
+			</element>
+			<element name="taxAmt" type="decimal" minOccurs="1"
+				maxOccurs="1">
+				<annotation>
+					<documentation>税额</documentation>
+				</annotation>
+			</element>
+			<element name="detailID" type="string" minOccurs="1"
+				maxOccurs="1">
+				<annotation>
+					<documentation>明细ID</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<!-- 明细实体结束 -->
+
+	<!-- Response开始 -->
+	<complexType name="SynFsscBillResponse">
+		<annotation>
+			<documentation>报账申请单信息同步响应信息</documentation>
+		</annotation>
+		<sequence>
+			<element name="isSucess" type="boolean">
+				<annotation>
+					<documentation>是否同步成功（1表示成功，0表示失败）</documentation>
+				</annotation>
+			</element>
+			<element name="failReason" type="string">
+				<annotation>
+					<documentation>失败原因，成功时该值为success</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<!-- Response结束 -->
+	
+</schema>
